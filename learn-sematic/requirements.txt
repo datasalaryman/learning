@@ -1,7 +1,0 @@
-sematic
-plotly
-torch
-torchvision
-torchmetrics
-pandas
-sklearn
