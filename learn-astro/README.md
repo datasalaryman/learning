@@ -7,7 +7,7 @@ yarn create astro
 ## Project Structure
 
 ```
-/
+.
 ├── README.md
 ├── astro.config.mjs
 ├── package.json
@@ -16,12 +16,17 @@ yarn create astro
 ├── src
 │   ├── content
 │   │   ├── blog
+│   │   │   ├── test-post copy.mdx
 │   │   │   └── test-post.mdx
 │   │   └── config.ts
 │   ├── env.d.ts
-│   └── pages
-│       ├── [...slug].astro
-│       └── index.astro
+│   ├── layouts
+│   │   ├── Base.astro
+│   │   └── BlogPost.astro
+│   ├── pages
+│   │   ├── [...slug].astro
+│   │   └── index.astro
+│   └── utils.ts
 ├── tailwind.config.cjs
 ├── tsconfig.json
 └── yarn.lock
