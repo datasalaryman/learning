@@ -1,18 +1,19 @@
 ---
-import { getCollection } from 'astro:content';
-import { slugify } from '../utils';
-
+import { getCollection } from "astro:content";
+import { slugify } from "../utils";
 
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
-  return blogEntries.map(entry => ({
-    params: { slug: "blog/" + slugify(entry.data.title) }, props: { entry },
+  const blogEntries = await getCollection("blog");
+  return blogEntries.map((entry) => ({
+    params: { slug: "blog/" + slugify(entry.data.title) },
+    props: { entry },
   }));
 }
 // 2. When it's time to render, you can get the entry directly from the prop
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
+
 <!-- <h1>{entry.data.title}</h1> -->
 <Content />

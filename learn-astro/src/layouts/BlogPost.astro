@@ -1,10 +1,12 @@
 ---
-import Base from './Base.astro'
-const { frontmatter } = Astro.props
+import Base from "./Base.astro";
+const { frontmatter } = Astro.props;
 ---
 
-<Base title={ frontmatter.title }>
-    <h1>{ frontmatter.title }</h1>
-    <h2>{ frontmatter.author }, {frontmatter.date}</h2>
-    <slot/>
+<Base title={frontmatter.title}>
+  <h1>{frontmatter.title}</h1>
+  <h2>{frontmatter.author}, {frontmatter.date}</h2>
+  <div class="[&>p]:mx-auto [&>p]:py-1.5">
+    <slot />
+  </div>
 </Base>
