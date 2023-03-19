@@ -4,8 +4,12 @@ const { frontmatter } = Astro.props;
 ---
 
 <Base title={frontmatter.title}>
-  <h1>{frontmatter.title}</h1>
-  <h2>{frontmatter.author}, {frontmatter.date}</h2>
+  <div class="pt-4 pb-10">
+    <h1 class="pb-4 text-4xl font-medium">{frontmatter.title}</h1>
+    <h2 class="py-1 text-2xl font-light">
+      {frontmatter.author}, {frontmatter.date}
+    </h2>
+  </div>
   <div class="[&>p]:mx-auto [&>p]:py-1.5">
     <slot />
   </div>
