@@ -1,7 +1,36 @@
 ---
 import Base from "../layouts/Base.astro";
+import { slugify } from "../utils";
+
+import { getCollection } from "astro:content";
+
+const blogEntries = await getCollection('blog');
+const blogEntryParams = blogEntries.map((entry) => ({
+  title: entry.data.title,
+  slug: "blog/" + slugify(entry.data.title),
+  date: entry.data.date
+}))
 ---
 
-<Base title="Astro">
-  <h1>Astro</h1>
+<Base title="@div_center">
+  <div class="[&>p]:mx-auto [&>p]:py-1.5">
+    Hi, I'm Francis! I work in tech building software for data and
+    infrastructure solutions.
+    <br /><br />
+    Right now, I'm exploring how to build apps using the new tools in web development
+    like Astro, TailwindCSS, NextJS, trpc and TRPC.
+    <br /><br />
+    Here is a list of the blog posts I've written on topics I'm interested in:
+    <br /><br />
+    <table class="table-fixed border-collapse w-full">
+      {
+        blogEntryParams.map(entry => (
+          <tr>
+            <td class="w-1/4">{entry.date}</td>
+            <td class="pl-8"><a href={"/" + entry.slug}>{entry.title}</a></td>
+          </tr>
+        ))
+      }
+    </table>
+  </div>
 </Base>
