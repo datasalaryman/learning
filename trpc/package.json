@@ -11,5 +11,9 @@
   "devDependencies": {
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
+  },
+  "dependencies": {
+    "@trpc/client": "^10.26.0",
+    "@trpc/server": "^10.26.0"
   }
 }
