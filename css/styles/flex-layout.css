@@ -1,0 +1,11 @@
+.flex {
+  display: flex;
+}
+
+.flex-value-1 {
+  display: flex;
+}
+
+.flex-value-1 > div {
+  flex: 1;
+}

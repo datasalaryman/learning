@@ -1,0 +1,11 @@
+.display-block > div {
+  display: block;
+}
+
+.display-inline > div {
+  display: inline;
+}
+
+.display-inline-block > div {
+  display: inline-block;
+}
