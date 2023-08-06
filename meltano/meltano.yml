@@ -5,3 +5,28 @@ environments:
 - name: dev
 - name: staging
 - name: prod
+plugins:
+  extractors:
+  - name: tap-github
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/tap-github.git
+    config:
+      start_date: '2023-06-01'
+      repositories:
+      - datasalaryman/learning
+    select:
+    - commits.url
+    - commits.sha
+    - commits.commit_timestamp
+  loaders:
+  - name: target-jsonl
+    variant: andyh1203
+    pip_url: target-jsonl
+  - name: target-postgres
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-postgres.git
+    config:
+      user: meltano
+      database: postgres
+      add_record_metadata: true
+      host: 192.168.215.2
