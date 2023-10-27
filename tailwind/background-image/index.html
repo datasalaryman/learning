@@ -6,6 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Background image with text in front</title>
   </head>
-  <body class="w-full">
+  <body>
+    <main class="max-w-fit min-h-screen max-h-fit flex flex-col flex-grow">
+
+      <!-- first section -->
+      <section class="relative h-fit w-screen flex flex-col place-items-center justify-around">
+        <img class="block" src="/bg_1.jpg">
+        <div class="block absolute text-black">Hello</div>
+      </section>
+
+      <!-- second section -->
+      <section class="relative h-fit w-screen flex flex-col place-items-center justify-around">
+        <img class="block" src="/bg_2.jpg">
+        <div class="block absolute text-white">Hello</div>
+      </section>
+
+      <!-- third section -->
+      <section class="relative h-fit w-screen flex flex-col place-items-center justify-around">
+        <img class="block" src="/bg_3.jpg">
+        <div class="block absolute text-white">Hello</div>
+      </section>
+
+    </main>
   </body>
 </html>
