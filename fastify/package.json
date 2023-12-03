@@ -1,0 +1,18 @@
+{
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js --dev",
+    "start": "node server.js",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@fastify/vite": "latest",
+    "@vitejs/plugin-react": "^4.2.0",
+    "fastify": "latest",
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "vite": "latest"
+  }
+}
