@@ -12,7 +12,8 @@ RPC_ENDPOINT = os.environ.get("RPC_ENDPOINT")
 http_client = Client(RPC_ENDPOINT)
 
 def handler(event, context):
-    tx_sig = Signature.from_string(event["payload"])
+    event_message = json.loads(event["Records"][0]['Sns']["Message"])["payload"]
+    tx_sig = Signature.from_string(event_message)
     tx = http_client.get_transaction(tx_sig)
     tx_json = json.loads(tx.to_json())
-    return tx_json
+    print(tx_json)
