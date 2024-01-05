@@ -4,6 +4,7 @@ import json
 import os
 
 from dotenv import load_dotenv
+from loguru import logger
 
 load_dotenv()
 
@@ -16,4 +17,4 @@ def handler(event, context):
     tx_sig = Signature.from_string(event_message)
     tx = http_client.get_transaction(tx_sig)
     tx_json = json.loads(tx.to_json())
-    print(tx_json)
+    logger.info(tx_json)
