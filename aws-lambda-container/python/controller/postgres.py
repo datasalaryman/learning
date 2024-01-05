@@ -59,7 +59,10 @@ def transaction_insert(conn, table:Table, data:dict):
 
         insert_result.close()
 
-        logger.info(f'{data["result"]["transaction"]["signatures"][0]} processed')
+        logger.info(f'{data["result"]["transaction"]["signatures"][0]} ingestee')
+
+    else:
+        logger.info(f'{data["result"]["transaction"]["signatures"][0]} already in database')
 
 
 def handle_output(obj):
@@ -71,4 +74,3 @@ def handle_output(obj):
     with engine.connect() as conn:
         logger.info("Connected to database")
         transaction_insert(conn=conn, table=solana_raw, data=obj)
-        logger.info("Transaction ingested")
