@@ -1,3 +1,6 @@
 boto3
 solana
 python-dotenv
+sqlalchemy==1.4.48
+loguru
+python-dotenv
