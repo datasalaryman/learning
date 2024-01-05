@@ -8,6 +8,7 @@ RUN pip install -r requirements.txt
 
 # Copy function code
 COPY controller/* ${LAMBDA_TASK_ROOT}/controller/
+COPY schema/* ${LAMBDA_TASK_ROOT}/schema/
 
 COPY main.py ${LAMBDA_TASK_ROOT}
 

@@ -62,7 +62,7 @@ def transaction_insert(conn, table:Table, data:dict):
         logger.info(f'{data["result"]["transaction"]["signatures"][0]} processed')
 
 
-def lambda_handle_output(obj):
+def handle_output(obj):
     engine = create_engine(
         f"postgresql+psycopg2://{WAREHOUSE_USER}:{WAREHOUSE_PASSWORD}@{WAREHOUSE_HOSTNAME}/{WAREHOUSE_DATABASE}"
     )

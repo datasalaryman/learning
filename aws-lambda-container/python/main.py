@@ -7,7 +7,11 @@ from dotenv import load_dotenv
 from loguru import logger
 
 from controller.postgres import (
-    lambda_handle_output
+    handle_output
+)
+
+from schema.transaction import (
+    parse_object
 )
 
 load_dotenv()
@@ -19,9 +23,17 @@ http_client = Client(RPC_ENDPOINT)
 def handler(event, context):
     event_message = json.loads(event["Records"][0]['Sns']["Message"])["payload"]
     tx_sig = Signature.from_string(event_message)
-    tx = http_client.get_transaction(tx_sig)
+
+    
+
+    tx = http_client.get_transaction(
+        tx_sig=tx_sig,
+        max_supported_transaction_version=0
+    )
+
     tx_json = json.loads(tx.to_json())
     logger.info(tx_json)
-    lambda_handle_output(tx_json)
+    parse_object(tx_json)
+    handle_output(tx_json)
     logger.info("Done.")
-    
+
