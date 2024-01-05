@@ -4,3 +4,4 @@ python-dotenv
 sqlalchemy==1.4.48
 loguru
 python-dotenv
+psycopg2-binary

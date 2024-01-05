@@ -6,6 +6,10 @@ import os
 from dotenv import load_dotenv
 from loguru import logger
 
+from controller.postgres import (
+    lambda_handle_output
+)
+
 load_dotenv()
 
 RPC_ENDPOINT = os.environ.get("RPC_ENDPOINT")
@@ -18,3 +22,6 @@ def handler(event, context):
     tx = http_client.get_transaction(tx_sig)
     tx_json = json.loads(tx.to_json())
     logger.info(tx_json)
+    lambda_handle_output(tx_json)
+    logger.info("Done.")
+    
