@@ -1,15 +1,34 @@
-# redis-channel
+# pubsub
 
-To install dependencies:
+## Prerequisites
+
+Install bun.sh 
+
+## Dependencies
 
 ```bash
 bun install
 ```
 
-To run:
+# Usage
 
+Open two terminals. Turn on the subscriber in one:
 ```bash
-bun start
+bun sub
 ```
 
-This project was created using `bun init` in bun v1.0.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+and to publish the `hello` message, turn on the publisher in the other:
+```bash
+bun pub
+```
+
+You should see the following in your `bun sub` terminal after running `bun pub` three times:
+
+```
+$ tsx sub/index.ts
+Hello redis-channel, via Bun!
+Subscribed to 1 channels.
+hello
+hello
+hello
+```
