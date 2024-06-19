@@ -3,8 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "pub": "tsx src/index.ts",
-    "sub": "tsx client/index.ts"
+    "pub": "tsx pub/index.ts",
+    "sub": "tsx sub/index.ts"
   },
   "devDependencies": {
     "bun-types": "latest"
