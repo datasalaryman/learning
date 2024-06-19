@@ -3,7 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "start": "bun run src/index.ts"
+    "pub": "tsx src/index.ts",
+    "sub": "tsx client/index.ts"
   },
   "devDependencies": {
     "bun-types": "latest"
@@ -14,6 +15,8 @@
   "dependencies": {
     "@t3-oss/env-core": "^0.10.1",
     "@upstash/redis": "^1.31.5",
+    "ioredis": "^5.4.1",
+    "tsx": "^4.15.6",
     "zod": "^3.23.8"
   }
 }

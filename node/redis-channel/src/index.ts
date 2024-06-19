@@ -8,11 +8,13 @@ const redis = new Redis({
   token: env.UPSTASH_TOKEN,
 });
 
+
+redis.publish("events", "hello");
 // string
 // await redis.set('key', '45', {
 //   ex: 60
 // });
 
-let data = await redis.get('key');
+// let data = await redis.get('key');
 
-console.log(data)
+// console.log(data)
