@@ -4,15 +4,11 @@ import { env } from "./env";
 console.log("Hello redis-channel, via Bun!");
 
 const main = () => {
-  const redis = new Redis({
-    host: env.UPSTASH_CLIENT_URL,
-    port: 6379,
-    username: env.UPSTASH_USER,
-    password: env.UPSTASH_TOKEN,
-    tls: {}
-  });
+  const redis = new Redis(
+    `rediss://:${env.UPSTASH_TOKEN}@${env.UPSTASH_CLIENT_URL}:33483`
+  );
 
-  redis.subscribe("events", (err, count) => {
+  redis.subscribe("events-stg", (err, count) => {
     if (err) console.error(err.message);
     console.log(`Subscribed to ${count} channels.`);
   });
@@ -21,6 +17,7 @@ const main = () => {
     // console.log(`Received message from ${channel} channel.`);
     console.log(message);
   });
+
 };
 
 main();
