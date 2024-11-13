@@ -3,7 +3,8 @@ import { z } from "zod";
 
 export const env = createEnv({
   server: {
-    TG_BOT_KEY: z.string()
+    TG_BOT_KEY: z.string(), 
+    USER_PDA: z.string()
   },
   /**
    * What object holds the environment variables at runtime. This is usually
