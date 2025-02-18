@@ -4,11 +4,11 @@
   "private": true,
   "scripts": {
     "anchor": "cd anchor && anchor",
-    "anchor-refresh": "rm -rf anchor/target", 
+    "anchor-refresh": "rm -rf anchor/target",
     "anchor-build": "cd anchor && anchor build",
     "anchor-localnet": "cd anchor && anchor localnet",
-    "anchor-test": "cd anchor && anchor test --skip-local-validator",
-    "anchor-deploy": "cd anchor && anchor deploy", 
+    "anchor-test": "cd anchor && anchor test --skip-local-validator --skip-deploy",
+    "anchor-deploy": "cd anchor && anchor deploy",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -24,12 +24,14 @@
     "@tabler/icons-react": "^3.11.0",
     "@tanstack/react-query": "^5.51.11",
     "@tanstack/react-query-next-experimental": "^5.51.11",
+    "anchor-bankrun": "^0.5.0",
     "daisyui": "^4.12.10",
     "jotai": "^2.9.1",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
-    "react-hot-toast": "^2.4.1"
+    "react-hot-toast": "^2.4.1",
+    "solana-bankrun": "^0.4.0"
   },
   "devDependencies": {
     "@types/bn.js": "^5.1.0",
