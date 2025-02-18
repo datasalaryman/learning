@@ -8,63 +8,46 @@ declare_id!("coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF");
 pub mod proj2 {
     use super::*;
 
-  pub fn close(_ctx: Context<CloseProj2>) -> Result<()> {
-    Ok(())
-  }
-
-  pub fn decrement(ctx: Context<Update>) -> Result<()> {
-    ctx.accounts.proj2.count = ctx.accounts.proj2.count.checked_sub(1).unwrap();
-    Ok(())
-  }
-
-  pub fn increment(ctx: Context<Update>) -> Result<()> {
-    ctx.accounts.proj2.count = ctx.accounts.proj2.count.checked_add(1).unwrap();
-    Ok(())
-  }
-
-  pub fn initialize(_ctx: Context<InitializeProj2>) -> Result<()> {
-    Ok(())
-  }
-
-  pub fn set(ctx: Context<Update>, value: u8) -> Result<()> {
-    ctx.accounts.proj2.count = value.clone();
-    Ok(())
-  }
+    pub fn initialize_poll(
+      ctx: Context<InitializePoll>, 
+      poll_id: u64, 
+      description: String, 
+      poll_start: u64, 
+      poll_end: u64
+    ) -> Result<()> {
+      let poll = &mut ctx.accounts.poll;
+      poll.poll_id = poll_id; 
+      poll.description = description; 
+      poll.poll_start = poll_start; 
+      poll.poll_end = poll_end; 
+      poll.candidate_amount = 0; 
+      Ok(())
+    }
 }
 
 #[derive(Accounts)]
-pub struct InitializeProj2<'info> {
+#[instruction(poll_id: u64)]
+pub struct InitializePoll<'info> {
   #[account(mut)]
-  pub payer: Signer<'info>,
-
+  pub signer:Signer<'info>, 
   #[account(
-  init,
-  space = 8 + Proj2::INIT_SPACE,
-  payer = payer
+    init, 
+    payer=signer, 
+    space=8 + Poll::INIT_SPACE, 
+    seeds = [poll_id.to_le_bytes().as_ref()], 
+    bump, 
   )]
-  pub proj2: Account<'info, Proj2>,
-  pub system_program: Program<'info, System>,
-}
-#[derive(Accounts)]
-pub struct CloseProj2<'info> {
-  #[account(mut)]
-  pub payer: Signer<'info>,
-
-  #[account(
-  mut,
-  close = payer, // close account and return lamports to payer
-  )]
-  pub proj2: Account<'info, Proj2>,
-}
-
-#[derive(Accounts)]
-pub struct Update<'info> {
-  #[account(mut)]
-  pub proj2: Account<'info, Proj2>,
+  pub poll: Account<'info, Poll>, 
+  pub system_program: Program<'info, System>, 
 }
 
 #[account]
 #[derive(InitSpace)]
-pub struct Proj2 {
-  count: u8,
+pub struct Poll {
+  pub poll_id: u64, 
+  #[max_len(280)]
+  pub description: String, 
+  pub poll_start: u64, 
+  pub poll_end: u64, 
+  pub candidate_amount: u64, 
 }
