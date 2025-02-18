@@ -1,76 +1,47 @@
 import * as anchor from '@coral-xyz/anchor'
 import {Program} from '@coral-xyz/anchor'
-import {Keypair} from '@solana/web3.js'
-import {Proj2} from '../target/types/proj2'
+import {Keypair, PublicKey} from '@solana/web3.js'
+import { Proj2 } from "../target/types/proj2"
+import { BankrunProvider, startAnchor } from 'anchor-bankrun';
 
-describe('proj2', () => {
-  // Configure the client to use the local cluster.
-  const provider = anchor.AnchorProvider.env()
-  anchor.setProvider(provider)
-  const payer = provider.wallet as anchor.Wallet
+const IDL = require("../target/idl/proj2.json");
 
-  const program = anchor.workspace.Proj2 as Program<Proj2>
+const votingAddress = new PublicKey('coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF')
 
-  const proj2Keypair = Keypair.generate()
+describe('Voting', () => {
 
-  it('Initialize Proj2', async () => {
-    await program.methods
-      .initialize()
-      .accounts({
-        proj2: proj2Keypair.publicKey,
-        payer: payer.publicKey,
-      })
-      .signers([proj2Keypair])
-      .rpc()
+  it('Initialize Poll', async () => {
+    const context = await startAnchor("", [
+      {
+        name: "proj2", 
+        programId: votingAddress
+      }
+    ], []);
 
-    const currentCount = await program.account.proj2.fetch(proj2Keypair.publicKey)
+    const provider = new BankrunProvider(context);
 
-    expect(currentCount.count).toEqual(0)
+    const votingProgram = new Program<Proj2>(IDL, provider);
+
+    await votingProgram.methods.initializePoll(
+      new anchor.BN(1), 
+      "What is your favorite type of peanut butter?", 
+      new anchor.BN(0), 
+      new anchor.BN(1839887705)
+    ).rpc();
+
+    const [pollAddress] = PublicKey.findProgramAddressSync(
+      [new anchor.BN(1).toArrayLike(Buffer, 'le', 8)],
+      votingAddress
+    );  
+
+    const poll = await votingProgram.account.poll.fetch(pollAddress);
+
+    console.log(poll); 
+
+    expect(poll.pollId.toNumber()).toEqual(1); 
+    expect(poll.description).toEqual("What is your favorite type of peanut butter?"); 
+    expect(poll.pollStart.toNumber()).toBeLessThan(poll.pollEnd.toNumber()); 
+
   })
 
-  it('Increment Proj2', async () => {
-    await program.methods.increment().accounts({ proj2: proj2Keypair.publicKey }).rpc()
-
-    const currentCount = await program.account.proj2.fetch(proj2Keypair.publicKey)
-
-    expect(currentCount.count).toEqual(1)
-  })
-
-  it('Increment Proj2 Again', async () => {
-    await program.methods.increment().accounts({ proj2: proj2Keypair.publicKey }).rpc()
-
-    const currentCount = await program.account.proj2.fetch(proj2Keypair.publicKey)
-
-    expect(currentCount.count).toEqual(2)
-  })
-
-  it('Decrement Proj2', async () => {
-    await program.methods.decrement().accounts({ proj2: proj2Keypair.publicKey }).rpc()
-
-    const currentCount = await program.account.proj2.fetch(proj2Keypair.publicKey)
-
-    expect(currentCount.count).toEqual(1)
-  })
-
-  it('Set proj2 value', async () => {
-    await program.methods.set(42).accounts({ proj2: proj2Keypair.publicKey }).rpc()
-
-    const currentCount = await program.account.proj2.fetch(proj2Keypair.publicKey)
-
-    expect(currentCount.count).toEqual(42)
-  })
-
-  it('Set close the proj2 account', async () => {
-    await program.methods
-      .close()
-      .accounts({
-        payer: payer.publicKey,
-        proj2: proj2Keypair.publicKey,
-      })
-      .rpc()
-
-    // The account should no longer exist, returning null.
-    const userAccount = await program.account.proj2.fetchNullable(proj2Keypair.publicKey)
-    expect(userAccount).toBeNull()
-  })
 })
