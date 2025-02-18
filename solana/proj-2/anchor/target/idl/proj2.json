@@ -1,5 +1,5 @@
 {
-  "address": "coUnmi3oBUtwtd9fjeAvSsJssXh5A5xyPbhpewyzRVF",
+  "address": "3mAviCYMWpRQ9s5pUuMU2ZBsYPWKEg12M182JNc1N9hA",
   "metadata": {
     "name": "proj2",
     "version": "0.1.0",
@@ -132,14 +132,14 @@
     {
       "name": "Proj2",
       "discriminator": [
-        255,
-        176,
-        4,
-        245,
-        188,
-        253,
-        124,
-        25
+        132,
+        58,
+        169,
+        142,
+        101,
+        130,
+        11,
+        186
       ]
     }
   ],
