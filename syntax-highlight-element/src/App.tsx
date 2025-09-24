@@ -1,7 +1,6 @@
 import "./index.css";
 import { APITester } from "./APITester";
 import { Card, CardContent } from "@/components/ui/card";
-
 import logo from "./logo.svg";
 import reactLogo from "./react.svg";
 
@@ -32,6 +31,9 @@ export function App() {
             and save to test HMR
           </p>
           <APITester />
+          <syntax-highlight language="js">
+            { `import { useState } from "react";`}
+          </syntax-highlight>
         </CardContent>
       </Card>
     </div>
