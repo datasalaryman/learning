@@ -22,6 +22,7 @@
     "react": "^19",
     "react-dom": "^19",
     "react-hook-form": "^7.54.2",
+    "react-syntax-highlighter": "^15.6.6",
     "syntax-highlight-element": "^1.2.0",
     "tailwind-merge": "^3.0.1",
     "tailwindcss": "^4.0.6",
@@ -29,8 +30,9 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/bun": "latest"
+    "@types/react-syntax-highlighter": "^15.5.13"
   }
 }
