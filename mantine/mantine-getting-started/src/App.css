@@ -5,6 +5,10 @@
   text-align: center;
 }
 
+:root[data-mantine-color-scheme="dark"] {
+  --mantine-color-body: #07060B !important;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
